@@ -1,11 +1,11 @@
 <?php
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 $percent = 100 * $current_amount / $cart_total_need;
 
-if($percent > 100) $percent = 100;
-if($percent < 0) $percent = 0;
+if ($percent > 100) $percent = 100;
+if ($percent < 0) $percent = 0;
 
 $remaining = $cart_total_need - $current_amount;
 
@@ -23,23 +23,23 @@ if ($remaining > 0) {
 
 ?>
 
-<div class="dcw-discount-card dcw-discount-card-<?php echo $rule->id; ?> dcw-discount-card-<?php echo $rule->type; ?>">
-        
-	<div class="dcw-progress-bar-container">
-		<span class="dcw-progress-label label-zero"><?php echo wc_price(0); ?></span>
-	            
-		<div class="dcw-progress-track">
-			<div class="progress-car" style="left: <?php echo $percent; ?>%;">
-				<img src="<?php echo plugins_url('site/assets/images/progress-image.png', DCW_PLUGIN_FILE); ?>"
-                     alt="<?php _e('Progress Icon', 'discounts-cart'); ?>">
-			</div>
-		                
-			<div class="dcw-progress-fill" style="width: <?php echo $percent; ?>%;"></div>
-		</div>
-		            
-		<span class="dcw-progress-label label-target"><?php echo wc_price($cart_total_need); ?></span>
-	</div>
+<div class="dcw-discount-card dcw-discount-card-<?php echo $rule->id; ?> dcw-discount-card-<?php echo $rule->type; ?> <?php echo ($percent == 100) ? 'applied' : ''; ?>">
 
-	<div class="dcw-card-notice"><?php echo $message; ?></div>
+    <div class="dcw-card-notice"><?php echo $message; ?></div>
+
+    <div class="dcw-progress-bar-container">
+        <span class="dcw-progress-label label-zero"><?php echo wc_price(0); ?></span>
+
+        <div class="dcw-progress-track">
+            <div class="progress-icon" style="left: <?php echo $percent; ?>%;">
+                <img src="<?php echo plugins_url('site/assets/images/discount-icon.svg', DCW_PLUGIN_FILE); ?>"
+                     alt="<?php _e('Progress Icon', 'discounts-cart'); ?>">
+            </div>
+
+            <div class="dcw-progress-fill" style="width: <?php echo $percent; ?>%;"></div>
+        </div>
+
+        <span class="dcw-progress-label label-target"><?php echo wc_price($cart_total_need); ?></span>
+    </div>
 
 </div>

@@ -9,6 +9,8 @@ class DCW_Site_Manager
 
     public $settings;
 
+    private $k_managed_free_shipping = false;
+
     public function __construct(DCW_Rule_Repository     $repository,
                                 DCW_Condition_Validator $validator)
     {
@@ -22,20 +24,16 @@ class DCW_Site_Manager
 
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts'], 10);
 
-
         add_action('woocommerce_checkout_create_order_line_item', [$this, 'mark_gift_in_checkout'], 10, 4);
-        add_action('woocommerce_before_calculate_totals', [$this, 'manage_gift_price']);
-        add_action('woocommerce_before_calculate_totals', [$this, 'manage_sort_gift'], 999);
+        add_action('woocommerce_before_calculate_totals', [$this, 'calculate_totals'], 999);
         add_action('woocommerce_cart_item_quantity', [$this, 'manage_gift_quantity'], 10, 3);
         // add_action('woocommerce_get_item_data', [$this, 'manage_gift_item_data'], 10, 2);
-
-        add_filter('woocommerce_package_rates', [$this, 'manage_free_shippment'], 20, 2);
-        add_filter('dcw_is_shipment_free', [$this, 'is_shipment_free'], 20);
 
         add_action('woocommerce_review_order_after_order_total', [$this, 'render_progress_card'], 11);
         add_action('dcw_render_progress_card', [$this, 'render_progress_card'], 20);
 
         add_action('init', [$this, 'register_block_progress_card']);
+
     }
 
     public function enqueue_scripts()
@@ -119,6 +117,11 @@ class DCW_Site_Manager
         return $item_data;
     }
 
+    public function calculate_totals($cart) {
+        $this->manage_sort_gift($cart);
+        $this->manage_gift_price($cart);
+    }
+
     public function manage_sort_gift($cart)
     {
         if (is_admin() && !defined('DOING_AJAX')) return;
@@ -141,33 +144,6 @@ class DCW_Site_Manager
         $cart->cart_contents = $sorted;
     }
 
-    public function manage_free_shippment($rates, $package)
-    {
-
-        if (!$this->is_shipment_free()) {
-            return $rates;
-        }
-
-        foreach ($rates as $rate_key => $rate) {
-
-            if ((float)$rate->cost > 0) {
-                $rates[$rate_key]->cost = 0;
-
-                if (!empty($rate->taxes)) {
-                    foreach ($rate->taxes as $key => $tax) {
-                        $rates[$rate_key]->taxes[$key] = 0;
-                    }
-                }
-            }
-        }
-        return $rates;
-    }
-
-    public function is_shipment_free()
-    {
-        return WC()->session->get('dcw_shipment_free', false);
-    }
-
     public function render_progress_card()
     {
 
@@ -175,7 +151,7 @@ class DCW_Site_Manager
 
         $cart = WC()->cart;
 
-        if(!$cart) return;
+        if (!$cart) return;
 
         foreach ($rules as $rule) {
 

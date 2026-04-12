@@ -23,17 +23,17 @@
                 </td>
             </tr>
 
-            <!--            <tr>-->
-            <!--                <th><label for="apply_cart_discount_as">Apply cart discount as</label></th>-->
-            <!--                <td>-->
-            <!--                    <select name="dcw_settings[apply_cart_discount_as]" id="apply_cart_discount_as">-->
-            <!--                        <option value="fee" -->
-            <?php //selected($options['apply_cart_discount_as'], 'fee'); ?><!-->Fee</option>-->
-            <!--                        <option value="coupon" -->
-            <?php //selected($options['apply_cart_discount_as'], 'coupon'); ?><!-->Coupon</option>-->
-            <!--                    </select>-->
-            <!--                </td>-->
-            <!--            </tr>-->
+<!--            <tr>
+                    <th><label for="apply_cart_discount_as">Apply cart discount as</label></th>
+                    <td>
+                                <select name="dcw_settings[apply_cart_discount_as]" id="apply_cart_discount_as">
+                                    <option value="fee"
+            <?php //selected($options['apply_cart_discount_as'], 'fee'); ?>Fee</option>
+                                   <option value="coupon"
+            <?php //selected($options['apply_cart_discount_as'], 'coupon'); ?>Coupon</option>
+                                </select>
+                    </td>
+            </tr>-->
 
         </table>
 

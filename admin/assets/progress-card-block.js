@@ -5,7 +5,7 @@
         title: 'Discounts cart - Progress block',
         description: 'Discounts cart - Progress block',
         category: 'common',
-        icon: 'smiley',
+        icon: 'awards',
         supports: {
             html: false,
         },

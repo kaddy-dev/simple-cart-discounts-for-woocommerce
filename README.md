@@ -44,6 +44,30 @@ Instead of relying on basic coupons, you can create dynamic discount rules based
 
 ---
 
+## 📊 Display Progress Bar
+
+You can display the progress bar in multiple ways:
+
+### 🧱 Gutenberg Block
+Add the **Discounts Cart → Progress Bar** block in the editor.
+
+### 🔧 Shortcode
+[dcw_progress_discount]
+
+### ⚙️ PHP (Theme developers)
+
+```php
+do_action('dcw_render_progress_card');
+```
+
+OR
+
+```php
+echo do_shortcode('[dcw_progress_discount]');
+```
+
+---
+
 ## ⚙️ How It Works
 
 1. Create a new rule

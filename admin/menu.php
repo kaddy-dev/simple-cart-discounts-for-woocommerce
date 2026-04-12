@@ -17,8 +17,8 @@ class DCW_Admin_Menu {
     public function register_menu() {
 
         add_menu_page(
-            'Discount Rules',
-            'Discount Rules',
+            'Cart Discounts',
+            'Cart Discounts',
             'manage_woocommerce',
             DCW_PLUGIN_SLUG,
             [$this, 'rules_page'],

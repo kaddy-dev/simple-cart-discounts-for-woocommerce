@@ -29,7 +29,7 @@ class DCW_Condition_Validator
                 return $this->cart_total($condition, $cart);
 
             default:
-                return true;
+                return false;
         }
 
         return false;

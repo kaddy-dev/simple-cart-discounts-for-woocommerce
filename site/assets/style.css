@@ -1,7 +1,7 @@
 .dcw-discount-card {
     margin: 20px 0;
     max-width: 100%;
-    padding: 0 10px;
+    padding: 0 10px 20px;
 }
 
 .dcw-progress-bar-container {
@@ -11,16 +11,12 @@
     gap: 15px;
     margin-bottom: 15px;
     position: relative;
-    padding-top: 20px;
 }
 
 .dcw-progress-label {
-    font-size: 14px;
     color: #4a4a4a;
     white-space: nowrap;
-    color: var(--text-brand-950, #665b5a);
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -45,9 +41,10 @@
     transition: width 0.6s ease;
 }
 
-.progress-car {
+.progress-icon {
     position: absolute;
-    top: -20px;
+    top: 2px;
+    margin-left: -10px;
     transform: translateX(-50%);
     transition: left 0.6s ease;
     z-index: 5;
@@ -55,10 +52,14 @@
     height: 14px;
 }
 
-.progress-car img {
+.progress-icon img {
     width: 25px;
     height: auto;
     display: block;
+}
+
+.dcw-discount-card.applied .progress-icon {
+    display: none;
 }
 
 .dcw-card-notice {
@@ -68,9 +69,8 @@
 }
 
 .dcw-card-notice strong {
-    color: var(--text-brand-950, #665b5a);
+    color: #665b5a;
     font-variant-numeric: lining-nums proportional-nums;
-    font-family: Raleway;
     font-size: 15px;
     font-style: normal;
     font-weight: 700;

@@ -1,0 +1,78 @@
+.dcw-discount-card {
+    margin: 20px 0;
+    max-width: 100%;
+    padding: 0 10px;
+}
+
+.dcw-progress-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    padding-top: 20px;
+}
+
+.dcw-progress-label {
+    font-size: 14px;
+    color: #4a4a4a;
+    white-space: nowrap;
+    color: var(--text-brand-950, #665b5a);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: Raleway;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%; /* 14px */
+}
+
+.dcw-progress-track {
+    position: relative;
+    height: 3px;
+    background: #e0e0e0;
+    flex-grow: 1;
+    border-radius: 2px;
+}
+
+.dcw-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #e32b40;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+.progress-car {
+    position: absolute;
+    top: -20px;
+    transform: translateX(-50%);
+    transition: left 0.6s ease;
+    z-index: 5;
+    width: 20px;
+    height: 14px;
+}
+
+.progress-car img {
+    width: 25px;
+    height: auto;
+    display: block;
+}
+
+.dcw-card-notice {
+    text-align: center;
+    font-size: 16px;
+    color: #4a4a4a;
+}
+
+.dcw-card-notice strong {
+    color: var(--text-brand-950, #665b5a);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: Raleway;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+}

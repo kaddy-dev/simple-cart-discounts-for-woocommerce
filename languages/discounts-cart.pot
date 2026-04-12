@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple Cart Discounts for WooCommerce\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: site/templates/progress-card.php
+msgid "Spend <strong>%s</strong> more to get:"
+msgstr ""
+
+#: site/templates/progress-card.php
+msgid "Progress Icon"
+msgstr ""

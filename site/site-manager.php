@@ -26,7 +26,7 @@ class DCW_Site_Manager
 
         add_action('woocommerce_checkout_create_order_line_item', [$this, 'mark_gift_in_checkout'], 10, 4);
         add_action('woocommerce_before_calculate_totals', [$this, 'calculate_totals'], 999);
-        add_action('woocommerce_cart_item_quantity', [$this, 'manage_gift_quantity'], 10, 3);
+        add_action('woocommerce_after_cart_item_quantity_update', [$this, 'manage_gift_quantity'], 10, 4);
         // add_action('woocommerce_get_item_data', [$this, 'manage_gift_item_data'], 10, 2);
 
         add_action('woocommerce_review_order_after_order_total', [$this, 'render_progress_card'], 11);
@@ -85,14 +85,38 @@ class DCW_Site_Manager
         }
     }
 
-    public function manage_gift_quantity($product_quantity, $cart_item_key, $cart_item)
+    // Disable update quantity of gifts
+    public function manage_gift_quantity($cart_item_key, $quantity, $old_quantity, $cart)
     {
-
-        if (!empty($cart_item['dcw_gift'])) {
-            return 1;
+        if (is_admin() && !defined('DOING_AJAX')) {
+            return;
         }
 
-        return $product_quantity;
+        $cart_item = $cart->get_cart_item($cart_item_key);
+        $rule_id = $cart_item['rule_id'] ?? null;
+
+        if (!$rule_id) return;
+
+        if (empty($cart_item['dcw_gift'])) {
+            return;
+        }
+
+        $rules = $this->rule_repository->get_enabled();
+
+        foreach ($rules as $rule) {
+
+            if ($rule->id != $rule_id) continue;
+
+            foreach ($rule->gifts as $gift) {
+                if ((int)$gift->product_id === (int)$cart_item['product_id']) {
+                    $correct_qty = (int)$gift->quantity ?: $old_quantity;
+                    if ($quantity != $correct_qty) {
+                        $cart->set_quantity($cart_item_key, $correct_qty);
+                    }
+                    return;
+                }
+            }
+        }
     }
 
     public function manage_gift_item_data($item_data, $cart_item)
@@ -117,7 +141,8 @@ class DCW_Site_Manager
         return $item_data;
     }
 
-    public function calculate_totals($cart) {
+    public function calculate_totals($cart)
+    {
         $this->manage_sort_gift($cart);
         $this->manage_gift_price($cart);
     }

@@ -2,7 +2,8 @@
 
 <div class="wrap">
     <h1 class="wp-heading-inline"><?php echo esc_html($title); ?></h1>
-    <a href="<?php echo esc_url(admin_url('admin.php?page=' . DCW_PLUGIN_SLUG)); ?>" class="page-title-action">Back to Rules</a>
+    <a href="<?php echo esc_url(admin_url('admin.php?page=' . DCW_PLUGIN_SLUG)); ?>" class="page-title-action">Back to
+        Rules</a>
 
     <hr class="wp-header-end">
 
@@ -14,7 +15,15 @@
             <tr>
                 <th><label for="enabled">Enabled</label></th>
                 <td>
-                    <input type="checkbox" id="enabled" name="enabled" value="1" checked>
+                    <label class="dcw-switch">
+                        <input
+                                type="checkbox"
+                                name="enabled"
+                                id="enabled"
+                                checked
+                        >
+                        <span class="dcw-slider"></span>
+                    </label>
                 </td>
             </tr>
             <tr>
@@ -37,10 +46,18 @@
             <tr>
                 <th><label for="show_progress_card">Show Progress Card</label></th>
                 <td>
-                    <input type="checkbox" id="show_progress_card" name="show_progress_card" value="1" checked>
+                    <label class="dcw-switch">
+                        <input
+                                type="checkbox"
+                                name="show_progress_card"
+                                id="show_progress_card"
+                                checked
+                        >
+                        <span class="dcw-slider"></span>
+                    </label>
                 </td>
             </tr>
-            
+
 
             <tr>
                 <th><label for="cart_total">Conditions</label></th>

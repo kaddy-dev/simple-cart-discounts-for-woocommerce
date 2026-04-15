@@ -159,7 +159,11 @@ class DCW_Admin_Controller
 
         $this->rule_repo->update($rule);
 
-        wp_redirect(admin_url('admin.php?page=' . DCW_PLUGIN_SLUG));
+        $redirect = wp_get_referer();
+        if (!$redirect) {
+            $redirect = admin_url('admin.php?page=' . DCW_PLUGIN_SLUG);
+        }
+        wp_redirect($redirect);
         exit;
     }
 
@@ -244,10 +248,7 @@ class DCW_Admin_Controller
     public function settings_page()
     {
 
-        $options = get_option('dcw_settings', [
-            'calculate_discount_by' => 'sale_price',
-            'apply_cart_discount_as' => 'fee'
-        ]);
+        $options = get_option('dcw_settings');
 
         $data = [
             'title' => 'Plugin Settings',

@@ -1,6 +1,6 @@
 <?php if (!defined('ABSPATH')) exit; ?>
 
-<div class="dcw-gifts">
+<div class="dcw-gifts dcw-rows">
 
     <?php if (!empty($rule->gifts)) : ?>
         <?php foreach ($rule->gifts as $index => $gift) : 
@@ -8,7 +8,7 @@
             if ($product) :
             ?>
 
-                <div class="dcw-gift-row">
+                <div class="dcw-gift-row dcw-row">
 
                     <select
                         name="gifts[<?php echo $index; ?>][product_id]"
@@ -25,7 +25,6 @@
                     <input
                         type="number"
                         name="gifts[<?php echo $index; ?>][quantity]"
-                        class="small-text"
                         value="<?php echo esc_attr($gift->quantity); ?>"
                         min="1"
                     >
@@ -44,7 +43,7 @@
 
 
 <template id="dcw-gift-row-template">
-    <div class="dcw-gift-row">
+    <div class="dcw-gift-row dcw-row">
 
         <select
             name="__name__[product_id]"
@@ -57,7 +56,6 @@
         <input
             type="number"
             name="__name__[quantity]"
-            class="small-text"
             value="1"
             min="1"
         >

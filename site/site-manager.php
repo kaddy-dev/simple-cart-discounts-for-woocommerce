@@ -17,23 +17,22 @@ class DCW_Site_Manager
         $this->rule_repository = $repository;
         $this->condition_validator = $validator;
 
-        $this->settings = get_option('dcw_settings', [
-            'calculate_discount_by' => 'sale_price',
-            'apply_cart_discount_as' => 'fee'
-        ]);
+        $this->settings = get_option('dcw_settings');
 
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts'], 10);
 
         add_action('woocommerce_checkout_create_order_line_item', [$this, 'mark_gift_in_checkout'], 10, 4);
         add_action('woocommerce_before_calculate_totals', [$this, 'calculate_totals'], 999);
         add_action('woocommerce_after_cart_item_quantity_update', [$this, 'manage_gift_quantity'], 10, 4);
-        // add_action('woocommerce_get_item_data', [$this, 'manage_gift_item_data'], 10, 2);
+
+        if (isset($this->settings['use_additional_detail_on_gifts']) && $this->settings['use_additional_detail_on_gifts']) {
+            add_action('woocommerce_get_item_data', [$this, 'manage_gift_item_data'], 10, 2);
+        }
 
         add_action('woocommerce_review_order_after_order_total', [$this, 'render_progress_card'], 11);
         add_action('dcw_render_progress_card', [$this, 'render_progress_card'], 20);
 
         add_action('init', [$this, 'register_block_progress_card']);
-
     }
 
     public function enqueue_scripts()
@@ -123,8 +122,8 @@ class DCW_Site_Manager
     {
         if (!empty($cart_item['dcw_gift'])) {
             $gift_data = [
-                'name' => __('Gift', 'discounts-cart'),
-                'value' => __('Free product', 'discounts-cart'),
+                'name' => $this->settings['additional_detail_on_gifts_name'] ?? '',
+                'value' => $this->settings['additional_detail_on_gifts_value'] ?? '',
             ];
 
             /**

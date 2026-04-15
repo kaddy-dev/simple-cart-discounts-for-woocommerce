@@ -2,7 +2,8 @@
 
 <div class="wrap">
     <h1 class="wp-heading-inline"><?php echo esc_html($title); ?></h1>
-    <a href="<?php echo esc_url(admin_url('admin.php?page=' . DCW_PLUGIN_SLUG)); ?>" class="page-title-action">Back to Rules</a>
+    <a href="<?php echo esc_url(admin_url('admin.php?page=' . DCW_PLUGIN_SLUG)); ?>" class="page-title-action">Back to
+        Rules</a>
 
     <hr class="wp-header-end">
 
@@ -15,21 +16,32 @@
             <tr>
                 <th><label for="enabled">Enabled</label></th>
                 <td>
-                    <input type="checkbox" id="enabled" name="enabled" value="1" <?php checked(!empty($rule->enabled)); ?>>
+                    <label class="dcw-switch">
+                        <input
+                                type="checkbox"
+                                name="enabled"
+                                id="enabled"
+                            <?php checked($rule->enabled); ?>
+                        >
+                        <span class="dcw-slider"></span>
+                    </label>
                 </td>
             </tr>
             <tr>
                 <th><label for="rule_name">Rule Name</label></th>
                 <td>
-                    <input type="text" id="rule_name" name="rule_name" value="<?php echo esc_attr($rule->name); ?>" class="regular-text">
+                    <input type="text" id="rule_name" name="rule_name" value="<?php echo esc_attr($rule->name); ?>"
+                           class="regular-text">
                 </td>
             </tr>
             <tr>
                 <th><label for="discount_type">Discount Type</label></th>
                 <td>
                     <select id="discount_type" name="discount_type">
-                        <option value="cart_discount" <?php selected($rule->type, 'cart_discount'); ?>>Cart Discount</option>
-                        <option value="free_shipping" <?php selected($rule->type, 'free_shipping'); ?>>Free Shipping</option>
+                        <option value="cart_discount" <?php selected($rule->type, 'cart_discount'); ?>>Cart Discount
+                        </option>
+                        <option value="free_shipping" <?php selected($rule->type, 'free_shipping'); ?>>Free Shipping
+                        </option>
                         <option value="free_gift" <?php selected($rule->type, 'free_gift'); ?>>Free Gift</option>
                     </select>
                 </td>
@@ -38,11 +50,19 @@
             <tr>
                 <th><label for="show_progress_card">Show Progress Card</label></th>
                 <td>
-                    <input type="checkbox" id="show_progress_card" name="show_progress_card" value="1" <?php checked(!empty($rule->show_progress_card)); ?>>
+                    <label class="dcw-switch">
+                        <input
+                                type="checkbox"
+                                name="show_progress_card"
+                                id="show_progress_card"
+                            <?php checked(!empty($rule->show_progress_card)); ?>
+                        >
+                        <span class="dcw-slider"></span>
+                    </label>
                 </td>
             </tr>
 
-            <tr >
+            <tr>
                 <th><label for="cart_total">Conditions</label></th>
                 <td>
                     <?php $this->render('rules/partials/conditions', ['rule' => $rule]); ?>

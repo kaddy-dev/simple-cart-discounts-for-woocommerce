@@ -11,6 +11,18 @@
     height: 0;
 }
 
+.dcw-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dcw-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .dcw-slider {
     position: absolute;
     cursor: pointer;

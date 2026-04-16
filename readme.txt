@@ -58,3 +58,6 @@ Disable update quantity of gifts
 
 = 1.0.3 =
 Setting: Additional details on Gifts
+
+= 1.0.4 =
+Conditions: Additional operators (>, < and !=)

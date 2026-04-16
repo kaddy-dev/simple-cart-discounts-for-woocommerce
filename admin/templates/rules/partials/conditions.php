@@ -11,9 +11,12 @@
                 </select>
 
                 <select name="conditions[<?php echo $index; ?>][operator]">
+                    <option value=">" <?php selected($condition->operator ?? '', '>'); ?>>></option>
+                    <option value="<" <?php selected($condition->operator ?? '', '<'); ?>><</option>
                     <option value=">=" <?php selected($condition->operator ?? '', '>='); ?>>≥</option>
                     <option value="<=" <?php selected($condition->operator ?? '', '<='); ?>>≤</option>
                     <option value="=" <?php selected($condition->operator ?? '', '='); ?>>=</option>
+                    <option value="!=" <?php selected($condition->operator ?? '', '!='); ?>>!=</option>
                 </select>
 
                 <input type="text" 
@@ -41,9 +44,12 @@
         </select>
 
         <select name="__name__[operator]">
+            <option value=">">></option>
+            <option value="<"><</option>
             <option value=">=">≥</option>
             <option value="<=">≤</option>
             <option value="=">=</option>
+            <option value="!=">!=</option>
         </select>
 
         <input type="text" 

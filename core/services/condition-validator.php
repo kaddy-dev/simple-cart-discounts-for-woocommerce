@@ -39,6 +39,14 @@ class DCW_Condition_Validator
     {
         $total = $cart->get_cart_contents_total();
 
+        if ($condition->operator == '>') {
+            return $total > $condition->value;
+        }
+
+        if ($condition->operator == '<') {
+            return $total < $condition->value;
+        }
+
         if ($condition->operator == '>=') {
             return $total >= $condition->value;
         }
@@ -49,6 +57,10 @@ class DCW_Condition_Validator
 
         if ($condition->operator == '=') {
             return $total == $condition->value;
+        }
+
+        if ($condition->operator == '!=') {
+            return $total != $condition->value;
         }
 
         return false;

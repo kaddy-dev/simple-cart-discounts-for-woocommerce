@@ -40,7 +40,7 @@ class DCW_Admin_Controller
                 $condition = new DCW_Rule_Condition();
                 $condition->type = sanitize_text_field($cond['type'] ?? '');
                 $condition->value = sanitize_text_field($cond['value'] ?? '');
-                $condition->operator = sanitize_text_field($cond['operator'] ?? '>=');
+                $condition->operator = sanitize_text_field($cond['operator'] ?? '>');
 
                 $rule->conditions[] = $condition;
             }
@@ -123,7 +123,7 @@ class DCW_Admin_Controller
                 $condition = new DCW_Rule_Condition();
                 $condition->type = sanitize_text_field($cond['type'] ?? '');
                 $condition->value = sanitize_text_field($cond['value'] ?? '');
-                $condition->operator = sanitize_text_field($cond['operator'] ?? '>=');
+                $condition->operator = sanitize_text_field($cond['operator'] ?? '>');
 
                 $rule->conditions[] = $condition;
             }

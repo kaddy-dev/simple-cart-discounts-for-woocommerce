@@ -122,8 +122,8 @@ class DCW_Site_Manager
     {
         if (!empty($cart_item['dcw_gift'])) {
             $gift_data = [
-                'name' => $this->settings['additional_detail_on_gifts_name'] ?? '',
-                'value' => $this->settings['additional_detail_on_gifts_value'] ?? '',
+                'name' => !empty($this->settings['additional_detail_on_gifts_name']) ? __($this->settings['additional_detail_on_gifts_name'], 'discounts-cart') : '',
+                'value' => !empty($this->settings['additional_detail_on_gifts_value']) ? __($this->settings['additional_detail_on_gifts_value'], 'discounts-cart') : '',
             ];
 
             /**

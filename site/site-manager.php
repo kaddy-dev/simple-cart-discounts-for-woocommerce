@@ -170,36 +170,84 @@ class DCW_Site_Manager
 
     public function render_progress_card()
     {
-
         $rules = $this->rule_repository->get_enabled();
 
         $cart = WC()->cart;
 
         if (!$cart) return;
 
+        $cart_total = $cart->get_cart_contents_total();
+
+        if (isset($this->settings['progress_card_show']) && $this->settings['progress_card_show'] == 'nearest_discount') {
+            $this->render_nearest_progress_card($rules, $cart_total);
+        } else {
+            $this->render_all_progress_card($rules, $cart_total);
+        }
+
+    }
+
+    protected function render_nearest_progress_card($rules, $cart_total)
+    {
+        $nearestRule = null;
+        $nearestNeed = null;
+        $maxRule = null;
+        $maxNeed = 0;
+
         foreach ($rules as $rule) {
 
             if (empty($rule->enabled)) continue;
-
             if (!$rule->show_progress_card) continue;
 
-//            $condition_validated = $this->condition_validator->validate($rule->conditions, $cart);
             $cart_total_need = 0;
+
             foreach ($rule->conditions as $condition) {
                 if ($condition->type == 'cart_total') {
                     $cart_total_need = $condition->value;
                 }
             }
 
-            if (!$cart_total_need) {
-                continue;
+            if (!$cart_total_need) continue;
+
+            if ($cart_total_need > $maxNeed) {
+                $maxNeed = $cart_total_need;
+                $maxRule = $rule;
             }
 
-            $cart_total = $cart->get_cart_contents_total();
+            if ($cart_total_need > $cart_total) {
+
+                if ($nearestNeed === null || $cart_total_need < $nearestNeed) {
+                    $nearestNeed = $cart_total_need;
+                    $nearestRule = $rule;
+                }
+            }
+        }
+
+        if ($nearestRule) {
+            $this->view_progress_card($nearestRule, $nearestNeed, $cart_total);
+        } elseif ($maxRule) {
+            $this->view_progress_card($maxRule, $maxNeed, $cart_total);
+        }
+    }
+
+    protected function render_all_progress_card($rules, $cart_total)
+    {
+        foreach ($rules as $rule) {
+
+            if (empty($rule->enabled)) continue;
+            if (!$rule->show_progress_card) continue;
+
+            $cart_total_need = 0;
+
+            foreach ($rule->conditions as $condition) {
+                if ($condition->type == 'cart_total') {
+                    $cart_total_need = $condition->value;
+                }
+            }
+
+            if (!$cart_total_need) continue;
 
             $this->view_progress_card($rule, $cart_total_need, $cart_total);
         }
-
     }
 
     public function view_progress_card($rule, $cart_total_need, $cart_total)

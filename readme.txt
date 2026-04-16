@@ -61,3 +61,6 @@ Setting: Additional details on Gifts
 
 = 1.0.4 =
 Conditions: Additional operators (>, < and !=)
+
+= 1.0.5 =
+Settings: Showing progress card optionals

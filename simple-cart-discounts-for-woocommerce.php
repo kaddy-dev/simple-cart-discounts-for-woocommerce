@@ -3,7 +3,7 @@
  * Plugin Name: Simple Cart Discounts for WooCommerce
  * Description: Build simple or advanced discount rules for your WooCommerce store — without writing code or using complicated tools.
  * Author: Kadyk Dmytro
- * Version: 1.0.4
+ * Version: 1.0.5
  * Text Domain: simple-cart-discounts-for-woocommerce
  * Requires at least: 5.8
  * Requires PHP: 7.4
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('DCW_VERSION')) {
-    define('DCW_VERSION', '1.0.4');
+    define('DCW_VERSION', '1.0.5');
 }
 
 /**

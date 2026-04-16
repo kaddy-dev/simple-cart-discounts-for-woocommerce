@@ -217,7 +217,6 @@ class DCW_Admin_Controller
 
     public function rules_page()
     {
-
         $rules = $this->rule_repo->get_all();
 
         $data = [
@@ -234,15 +233,15 @@ class DCW_Admin_Controller
         $rule = $this->rule_repo->find($rule_id);
 
         if (!$rule) {
-            wp_die('Rule not found');
+            $this->rules_page();
+        } else {
+            $data = [
+                'title' => 'Edit Discount Rule',
+                'rule' => $rule
+            ];
+
+            $this->render('rules/edit', $data);
         }
-
-        $data = [
-            'title' => 'Edit Discount Rule',
-            'rule' => $rule
-        ];
-
-        $this->render('rules/edit', $data);
     }
 
     public function settings_page()

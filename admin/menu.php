@@ -36,7 +36,7 @@ class DCW_Admin_Menu {
         );
 
        add_submenu_page(
-            null,
+           DCW_PLUGIN_SLUG,
             'Edit Rule',
             'Edit Rule',
             'manage_woocommerce',

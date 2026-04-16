@@ -61,7 +61,7 @@ class DCW_CartDiscount implements DCW_DiscountInterface {
 
         $amount = round($amount, wc_get_price_decimals());
 
-        if ($this->settings['apply_cart_discount_as'] === 'fee') {
+        if (!isset($this->settings['apply_cart_discount_as']) || $this->settings['apply_cart_discount_as'] === 'fee') {
 
             $cart->add_fee(
                 $this->rule->name,

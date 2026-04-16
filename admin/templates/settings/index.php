@@ -83,6 +83,29 @@
             </div>
         </div>
 
+        <!-- PROGRESS CARDS -->
+        <h2 class="hndle">Progress Cards</h2>
+        <div class="postbox">
+            <div class="inside">
+                <table class="form-table">
+                    <tr>
+                        <th><label for="use_additional_detail_on_gifts">Show</label></th>
+                        <td>
+                            <select name="dcw_settings[progress_card_show]" id="progress_card_show">
+                                <option value="all" <?php selected($options['progress_card_show'] ?? 'all', 'all'); ?>>
+                                    Show all
+                                </option>
+                                <option value="nearest_discount" <?php selected($options['progress_card_show'] ?? '', 'nearest_discount'); ?>>
+                                    Only the nearest discount
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
         <p class="submit">
             <button type="submit" class="button button-primary">Save Settings</button>
         </p>

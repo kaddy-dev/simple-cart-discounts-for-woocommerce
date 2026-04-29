@@ -55,12 +55,12 @@ class DCW_Site_Manager
 
     public function mark_gift_in_checkout($item, $cart_item_key, $values, $order)
     {
-        if (!empty($values['dcw_gift'])) {
-            $item->add_meta_data('dcw_gift', true, true);
+        if (!empty($values['_dcw_gift'])) {
+            $item->add_meta_data('_dcw_gift', true, true);
         }
 
-        if (!empty($values['rule_id'])) {
-            $item->add_meta_data('rule_id', $values['rule_id'], true);
+        if (!empty($values['_rule_id'])) {
+            $item->add_meta_data('_rule_id', $values['_rule_id'], true);
         }
     }
 
@@ -69,7 +69,7 @@ class DCW_Site_Manager
         if (is_admin() && !defined('DOING_AJAX')) return;
 
         foreach ($cart->get_cart() as $cart_item) {
-            if (!empty($cart_item['dcw_gift'])) {
+            if (!empty($cart_item['_dcw_gift'])) {
 
                 /**
                  * Change gift price
@@ -92,11 +92,11 @@ class DCW_Site_Manager
         }
 
         $cart_item = $cart->get_cart_item($cart_item_key);
-        $rule_id = $cart_item['rule_id'] ?? null;
+        $rule_id = $cart_item['_rule_id'] ?? null;
 
         if (!$rule_id) return;
 
-        if (empty($cart_item['dcw_gift'])) {
+        if (empty($cart_item['_dcw_gift'])) {
             return;
         }
 
@@ -120,7 +120,7 @@ class DCW_Site_Manager
 
     public function manage_gift_item_data($item_data, $cart_item)
     {
-        if (!empty($cart_item['dcw_gift'])) {
+        if (!empty($cart_item['_dcw_gift'])) {
             $gift_data = [
                 'name' => !empty($this->settings['additional_detail_on_gifts_name']) ? __($this->settings['additional_detail_on_gifts_name'], 'discounts-cart') : '',
                 'value' => !empty($this->settings['additional_detail_on_gifts_value']) ? __($this->settings['additional_detail_on_gifts_value'], 'discounts-cart') : '',
@@ -156,7 +156,7 @@ class DCW_Site_Manager
         $gifts = [];
 
         foreach ($cart_contents as $key => $item) {
-            if (!empty($item['dcw_gift'])) {
+            if (!empty($item['_dcw_gift'])) {
                 $gifts[$key] = $item;
             } else {
                 $regular[$key] = $item;

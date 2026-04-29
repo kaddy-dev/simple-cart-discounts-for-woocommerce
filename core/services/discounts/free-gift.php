@@ -22,8 +22,8 @@ class DCW_FreeGift implements DCW_DiscountInterface {
             if ($this->giftInCart($gift, $cart)) continue;
 
             $cart->add_to_cart($product_id, $gift->quantity, 0, [], [
-                'dcw_gift' => true,
-                'rule_id'  => $this->rule->id,
+                '_dcw_gift' => true,
+                '_rule_id'  => $this->rule->id,
             ]);
         }
     }
@@ -31,9 +31,9 @@ class DCW_FreeGift implements DCW_DiscountInterface {
     public function deactivate(WC_Cart $cart) {
         foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
 
-            if (empty($cart_item['dcw_gift'])) continue;
+            if (empty($cart_item['_dcw_gift'])) continue;
 
-            if (($cart_item['rule_id'] ?? null) != $this->rule->id) continue;
+            if (($cart_item['_rule_id'] ?? null) != $this->rule->id) continue;
 
             $cart->remove_cart_item($cart_item_key);
         }
@@ -45,9 +45,9 @@ class DCW_FreeGift implements DCW_DiscountInterface {
         if (!$product_id) return false;
 
         foreach ($cart->get_cart() as $item) {
-            if (!empty($item['dcw_gift'])) {
+            if (!empty($item['_dcw_gift'])) {
 
-                if($item['product_id'] == $product_id && ($item['rule_id'] ?? null) == $this->rule->id) {
+                if($item['product_id'] == $product_id && ($item['_rule_id'] ?? null) == $this->rule->id) {
                     return true;
                 }
 

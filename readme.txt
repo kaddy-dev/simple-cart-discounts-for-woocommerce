@@ -64,3 +64,6 @@ Conditions: Additional operators (>, < and !=)
 
 = 1.0.5 =
 Settings: Showing progress card optionals
+
+= 1.0.6 =
+Mark gift products via private meta keys

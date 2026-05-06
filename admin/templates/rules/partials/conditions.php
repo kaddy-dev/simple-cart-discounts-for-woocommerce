@@ -2,6 +2,33 @@
 
 <div class="dcw-conditions dcw-rows">
 
+    <?php if ($new) : ?>
+        <div class="dcw-condition-row dcw-row">
+
+            <select name="conditions[0][type]">
+                <option value="cart_total" selected>Cart Total</option>
+            </select>
+
+            <select name="conditions[0][operator]">
+                <option value=">" selected>></option>
+                <option value="<"><</option>
+                <option value=">=">≥</option>
+                <option value="<=">≤</option>
+                <option value="=">=</option>
+                <option value="!=">!=</option>
+            </select>
+
+            <input type="text"
+                   name="conditions[0][value]"
+                   value="0"
+            >
+
+            <button type="button" class="button dcw-remove-condition">×</button>
+
+        </div>
+    <?php endif; ?>
+
+
     <?php if (!empty($rule->conditions)) : ?>
         <?php foreach ($rule->conditions as $index => $condition) : ?>
             <div class="dcw-condition-row dcw-row">
@@ -19,9 +46,9 @@
                     <option value="!=" <?php selected($condition->operator ?? '', '!='); ?>>!=</option>
                 </select>
 
-                <input type="text" 
-                    name="conditions[<?php echo $index; ?>][value]" 
-                    value="<?php echo esc_attr($condition->value ?? ''); ?>"
+                <input type="text"
+                       name="conditions[<?php echo $index; ?>][value]"
+                       value="<?php echo esc_attr($condition->value ?? ''); ?>"
                 >
 
                 <button type="button" class="button dcw-remove-condition">×</button>
@@ -52,8 +79,9 @@
             <option value="!=">!=</option>
         </select>
 
-        <input type="text" 
-            name="__name__[value]"
+        <input type="text"
+               name="__name__[value]"
+               value="0"
         >
 
         <button type="button" class="button dcw-remove-condition">×</button>

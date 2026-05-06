@@ -21,7 +21,7 @@
                                 type="checkbox"
                                 name="enabled"
                                 id="enabled"
-                            <?php checked($rule->enabled); ?>
+                                <?php checked($rule->enabled); ?>
                         >
                         <span class="dcw-slider"></span>
                     </label>
@@ -55,7 +55,7 @@
                                 type="checkbox"
                                 name="show_progress_card"
                                 id="show_progress_card"
-                            <?php checked(!empty($rule->show_progress_card)); ?>
+                                <?php checked(!empty($rule->show_progress_card)); ?>
                         >
                         <span class="dcw-slider"></span>
                     </label>
@@ -65,7 +65,10 @@
             <tr>
                 <th><label for="cart_total">Conditions</label></th>
                 <td>
-                    <?php $this->render('rules/partials/conditions', ['rule' => $rule]); ?>
+                    <?php $this->render('rules/partials/conditions', [
+                            'rule' => $rule,
+                            'new' => false
+                    ]); ?>
                 </td>
             </tr>
 

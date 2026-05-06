@@ -16,7 +16,7 @@ class DCW_Cart_Manager
         $this->rule_repository = $repository;
         $this->condition_validator = $validator;
 
-        $this->settings = get_option('dcw_settings');
+        $this->settings = get_option('dcw_settings') ?: [];
 
         add_action('woocommerce_cart_calculate_fees', [$this, 'apply_discounts']);
         add_filter('woocommerce_package_rates', [$this, 'apply_discounts_free_shipping'], 100, 2);

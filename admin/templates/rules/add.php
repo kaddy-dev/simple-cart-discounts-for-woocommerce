@@ -62,7 +62,9 @@
             <tr>
                 <th><label for="cart_total">Conditions</label></th>
                 <td>
-                    <?php $this->render('rules/partials/conditions'); ?>
+                    <?php $this->render('rules/partials/conditions', [
+                            'new' => true
+                    ]); ?>
                 </td>
             </tr>
 

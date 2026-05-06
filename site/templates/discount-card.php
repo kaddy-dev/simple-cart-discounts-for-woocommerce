@@ -11,9 +11,9 @@ $remaining = $cart_total_need - $current_amount;
 
 if ($remaining > 0) {
     $message = sprintf(
-            __('Spend <strong>%s</strong> more to get:', 'discounts-cart'),
-            wc_price($remaining)
-        ) . ' ' . __($rule->name, 'discounts-cart');
+                    __('Spend <strong>%s</strong> more to get:', 'discounts-cart'),
+                    wc_price($remaining)
+            ) . ' ' . __($rule->name, 'discounts-cart');
 
     $message = apply_filters('dcw_message_progress_not_applied', $message, $rule, $remaining);
 } else {
@@ -39,7 +39,9 @@ if ($remaining > 0) {
             <div class="dcw-progress-fill" style="width: <?php echo $percent; ?>%;"></div>
         </div>
 
-        <span class="dcw-progress-label label-target"><?php echo wc_price($cart_total_need); ?></span>
+        <span class="dcw-progress-label label-target">
+            <?php echo apply_filters('dcw_progress_target', wc_price($cart_total_need), $cart_total_need, $remaining, $percent, $rule); ?>
+        </span>
     </div>
 
 </div>

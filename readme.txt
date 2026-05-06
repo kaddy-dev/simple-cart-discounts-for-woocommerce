@@ -67,3 +67,6 @@ Settings: Showing progress card optionals
 
 = 1.0.6 =
 Mark gift products via private meta keys
+
+= 1.0.7 =
+Default condition
